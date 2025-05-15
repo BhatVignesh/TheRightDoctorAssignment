@@ -1,0 +1,44 @@
+<h2>Edit Person</h2>
+<form #editForm="ngForm" (ngSubmit)="save()" novalidate>
+
+  <label>
+    Name:
+    <input [(ngModel)]="person.Name" name="Name" required minlength="2" #name="ngModel" />
+    <div *ngIf="name.invalid && name.touched" class="error">
+      Name is required (min 2 characters)
+    </div>
+  </label><br>
+
+  <label>
+    Age:
+    <input type="number" [(ngModel)]="person.Age" name="Age" required min="0" max="120" #age="ngModel" />
+    <div *ngIf="age.invalid && age.touched" class="error">
+      Valid Age required (0–120)
+    </div>
+  </label><br>
+
+  <label>
+    Gender:
+    <input [(ngModel)]="person.Gender" name="Gender" required #gender="ngModel" />
+    <div *ngIf="gender.invalid && gender.touched" class="error">
+      Gender is required
+    </div>
+  </label><br>
+
+  <label>
+    Mobile Number:
+    <input
+      [(ngModel)]="person.MobileNumber"
+      name="MobileNumber"
+      required
+      pattern="^[0-9]{10}$"
+      #mobile="ngModel"
+    />
+    <div *ngIf="mobile.invalid && mobile.touched" class="error">
+      Enter a 10-digit number
+    </div>
+  </label><br>
+
+  <button type="submit" [disabled]="editForm.invalid">Save</button>
+  <button (click)="router.navigate(['/people'])" type="button">Cancel</button>
+</form>
